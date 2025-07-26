@@ -49,14 +49,17 @@ sensor:
     update_interval: 1s
     acceleration_x:
       name: "Accelerometer 1 X"
+      id: accel_1_x
       filters:
         - offset: -0.202
     acceleration_y:
       name: "Accelerometer 1 Y"
+      id: accel_1_y
       filters:
         - offset: 0.443
     acceleration_z:
       name: "Accelerometer 1 Z"
+      id: accel_1_z
       filters:
         - offset: -0.09632
   - platform: bmi160
@@ -64,16 +67,56 @@ sensor:
     update_interval: 1s
     acceleration_x:
       name: "Accelerometer 2 X"
+      id: accel_2_x
       filters:
         - offset: 0.068
     acceleration_y:
       name: "Accelerometer 2 Y"
+      id: accel_2_y
       filters:
         - offset: 0.889
     acceleration_z:
       name: "Accelerometer 2 Z"
+      id: accel_2_z
       filters:
         - offset: -0.36332
+  - platform: template
+    name: "Acceleration X"
+    id: accel_x
+    lambda: return (id(accel_1_x).state + id(accel_2_x).state) / 2.0;
+    unit_of_measurement: "m/s²"
+    state_class: measurement
+    icon: mdi:axis-x-arrow
+    accuracy_decimals: 2
+    update_interval: 1s
+  - platform: template
+    name: "Acceleration Y"
+    id: accel_y
+    lambda: return (id(accel_1_y).state + id(accel_2_y).state) / 2.0;
+    unit_of_measurement: "m/s²"
+    state_class: measurement
+    icon: mdi:axis-y-arrow
+    accuracy_decimals: 2
+    update_interval: 1s
+  - platform: template
+    name: "Acceleration Z"
+    id: accel_z
+    lambda: return (id(accel_1_z).state + id(accel_2_z).state) / 2.0;
+    unit_of_measurement: "m/s²"
+    state_class: measurement
+    icon: mdi:axis-z-arrow
+    accuracy_decimals: 2
+    update_interval: 1s
+  - platform: template
+    name: "Acceleration magnitude"
+    id: accel_total
+    lambda: |-
+      return sqrt(pow(id(accel_x).state, 2) + pow(id(accel_y).state, 2) + pow(id(accel_z).state, 2));
+    unit_of_measurement: "m/s²"
+    state_class: measurement
+    icon: mdi:axis-arrow
+    accuracy_decimals: 2
+    update_interval: 1s
 
 i2c:
   sda: 21

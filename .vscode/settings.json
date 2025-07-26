@@ -9,6 +9,7 @@
     "editor.formatOnSave": true
   },
   "cSpell.words": [
+    "accel",
     "blinky",
     "ESPHome",
     "LOGD",
