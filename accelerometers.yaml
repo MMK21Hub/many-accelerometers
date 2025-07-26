@@ -10,6 +10,9 @@ esp32:
 
 # ESPHome boilerplate
 logger:
+  level: DEBUG
+  logs:
+    sensor: INFO
 api:
 wifi:
   networks: !secret wifi
@@ -28,19 +31,20 @@ sensor:
     address: 0x69
     update_interval: 1s
     acceleration_x:
-      name: "BMI160 Accel X"
+      name: "Accelerometer 1 X"
     acceleration_y:
-      name: "BMI160 Accel Y"
+      name: "Accelerometer 1 Y"
     acceleration_z:
-      name: "BMI160 Accel Z"
-    gyroscope_x:
-      name: "BMI160 Gyro X"
-    gyroscope_y:
-      name: "BMI160 Gyro Y"
-    gyroscope_z:
-      name: "BMI160 Gyro Z"
-    temperature:
-      name: "BMI160 Temperature"
+      name: "Accelerometer 1 Z"
+  - platform: bmi160
+    address: 0x68
+    update_interval: 1s
+    acceleration_x:
+      name: "Accelerometer 2 X"
+    acceleration_y:
+      name: "Accelerometer 2 Y"
+    acceleration_z:
+      name: "Accelerometer 2 Z"
 
 i2c:
   sda: 21
