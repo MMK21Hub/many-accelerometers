@@ -1,0 +1,53 @@
+# Device config
+esphome:
+  name: accelerometers
+  friendly_name: Accelerometers
+
+esp32:
+  board: esp32dev
+  framework:
+    type: esp-idf
+
+# ESPHome boilerplate
+logger:
+api:
+wifi:
+  networks: !secret wifi
+ota:
+  - platform: esphome
+    password: !secret ota_password
+
+# Everything else
+sensor:
+  - platform: internal_temperature
+    name: "CPU temperature"
+  - platform: wifi_signal
+    name: "Signal strength"
+    update_interval: 60s
+  - platform: bmi160
+    address: 0x68
+    update_interval: 1s
+    acceleration_x:
+      name: "BMI160 Accel X"
+    acceleration_y:
+      name: "BMI160 Accel Y"
+    acceleration_z:
+      name: "BMI160 Accel Z"
+    gyroscope_x:
+      name: "BMI160 Gyro X"
+    gyroscope_y:
+      name: "BMI160 Gyro Y"
+    gyroscope_z:
+      name: "BMI160 Gyro Z"
+    temperature:
+      name: "BMI160 Temperature"
+
+i2c:
+  sda: 21
+  scl: 22
+
+text_sensor:
+  - platform: wifi_info
+    ssid:
+      name: SSID
+      entity_category: diagnostic
