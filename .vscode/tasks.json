@@ -1,0 +1,28 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Flash ESP device ttyUSB0",
+      "type": "shell",
+      "command": "esphome",
+      "args": ["run", "${file}", "--device", "/dev/ttyUSB0"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Flash ESP device ttyACM0",
+      "type": "shell",
+      "command": "esphome",
+      "args": ["run", "${file}", "--device", "/dev/ttyACM0"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Flash ESP device OTA",
+      "type": "shell",
+      "command": "esphome",
+      "args": ["run", "${file}", "--device", "OTA"],
+      "problemMatcher": []
+    }
+  ]
+}
