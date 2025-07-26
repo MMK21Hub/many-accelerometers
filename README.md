@@ -48,3 +48,11 @@ Then, you can customise the addresses in `accelerometers.yaml` by editing the fo
   address: 0x69 # Edit this to match the address found above
   # [...]
 ```
+
+## Hardware details
+
+### BMI160 module
+
+Sourced from AliExpress: [BMI160 GY-BMI160 6DOF 6-axis Rate Gyro Gravity Accelerometer Sensor Module IIC I2C SPI Communication Protocol 3-5V](https://www.aliexpress.com/item/1005006351402967.html)
+
+![Pinout and schematic for the module](assets/bmi160_pinout.png)
