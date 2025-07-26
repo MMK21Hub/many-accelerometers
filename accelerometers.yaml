@@ -20,6 +20,23 @@ ota:
   - platform: esphome
     password: !secret ota_password
 
+# Averages for sensor 1:
+# AccelX: 0.202
+# AccelY: -0.443
+# AccelZ: 9.908
+# GyroX: 0.004
+# GyroY: -0.494
+# GyroZ: 0.255
+# Temperature: 27.725
+
+# Averages for sensor 2:
+# AccelX: -0.068
+# AccelY: -0.889
+# AccelZ: 10.175
+# GyroX: -0.483
+# GyroY: 0.486
+# GyroZ: 0.063
+
 # Everything else
 sensor:
   - platform: internal_temperature
@@ -32,19 +49,31 @@ sensor:
     update_interval: 1s
     acceleration_x:
       name: "Accelerometer 1 X"
+      filters:
+        - offset: -0.202
     acceleration_y:
       name: "Accelerometer 1 Y"
+      filters:
+        - offset: 0.443
     acceleration_z:
       name: "Accelerometer 1 Z"
+      filters:
+        - offset: -0.09632
   - platform: bmi160
     address: 0x68
     update_interval: 1s
     acceleration_x:
       name: "Accelerometer 2 X"
+      filters:
+        - offset: 0.068
     acceleration_y:
       name: "Accelerometer 2 Y"
+      filters:
+        - offset: 0.889
     acceleration_z:
       name: "Accelerometer 2 Z"
+      filters:
+        - offset: -0.36332
 
 i2c:
   sda: 21
