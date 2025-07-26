@@ -25,7 +25,7 @@ sensor:
     name: "Signal strength"
     update_interval: 60s
   - platform: bmi160
-    address: 0x68
+    address: 0x69
     update_interval: 1s
     acceleration_x:
       name: "BMI160 Accel X"

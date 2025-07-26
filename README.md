@@ -31,3 +31,20 @@ This option is recommended if your operating system provides a package for the `
 2. Run `esphome run accelerometers.yaml --device /dev/ttyUSB0` to flash it
 
 After the first flash, you can then upload new firmware via USB or OTA.
+
+### Finding I2C addresses
+
+After flashing the firmware, scroll through the logs to find a section like this:
+
+```none
+[17:22:52][I][i2c.idf:098]: Results from i2c bus scan:
+[17:22:52][I][i2c.idf:104]: Found i2c device at address 0x69
+```
+
+Then, you can customise the addresses in `accelerometers.yaml` by editing the following section for each accelerometer:
+
+```yaml
+- platform: bmi160
+  address: 0x69 # Edit this to match the address found above
+  # [...]
+```
