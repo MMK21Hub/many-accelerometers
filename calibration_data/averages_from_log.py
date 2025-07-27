@@ -3,11 +3,18 @@ import re
 from sys import argv
 from statistics import fmean
 
+COLUMNS = ["AccelX", "AccelY", "AccelZ", "GyroX", "GyroY", "GyroZ", "Temperature"]
 
-def print_average_values(averages: list[float]):
-    labels = ["AccelX", "AccelY", "AccelZ", "GyroX", "GyroY", "GyroZ", "Temperature"]
-    for label, value in zip(labels, averages):
+
+def print_values(values: list[float]):
+    for label, value in zip(COLUMNS, values):
         print(f"  {label}: {value:.3f}")
+
+
+def print_ranges(data: list[list[float]]):
+    for label, values in zip(COLUMNS, zip(*data)):
+        range = max(values) - min(values)
+        print(f"  {label}: {range:.3f} ({min(values):.3f} to {max(values):.3f})")
 
 
 def print_averages_from_log(log_data: str):
@@ -27,21 +34,16 @@ def print_averages_from_log(log_data: str):
         seconds = int(values.pop(0))
         # We assume every even reading is from sensor 1 and every odd reading is from sensor 2
         if reading_index % 2 == 0:
-            if previous_seconds == seconds:
-                # We expect exactly two sensor readings (one from each sensor) each second.
-                # If that doesn't happen, then it might mean that the order of the sensors gets swapped around, which would ruin our data.
-                print(f"Warning: Found questionable pair of readings @{line_index + 1}")
+            if values[0] > 0:
                 print(
-                    f"  Previous reading seconds={previous_seconds}, expected an increment, got {seconds}"
+                    f"Warning: Expected negative AccelX reading from sensor 1, got {values[0]}"
                 )
                 print(f"  {line}")
-            previous_seconds = seconds
             sensor_1_data.append(values)
         else:
-            if previous_seconds != seconds:
-                print(f"Warning: Found questionable pair of readings @{line_index + 1}")
+            if values[0] < 0:
                 print(
-                    f"  Previous reading seconds={previous_seconds}, expected it to stay the same, got {seconds}"
+                    f"Warning: Expected positive AccelX reading from sensor 2, got {values[0]}"
                 )
                 print(f"  {line}")
             sensor_2_data.append(values)
@@ -50,10 +52,17 @@ def print_averages_from_log(log_data: str):
     sensor_2_averages = [fmean(values) for values in zip(*sensor_2_data)]
 
     print("Sensor 1 averages:")
-    print_average_values(sensor_1_averages)
+    print_values(sensor_1_averages)
     print()
     print("Sensor 2 averages:")
-    print_average_values(sensor_2_averages)
+    print_values(sensor_2_averages)
+
+    print()
+    print("Sensor 1 ranges:")
+    print_ranges(sensor_1_data)
+    print()
+    print("Sensor 2 ranges:")
+    print_ranges(sensor_2_data)
 
 
 if __name__ == "__main__":
