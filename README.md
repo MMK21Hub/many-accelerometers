@@ -69,4 +69,4 @@ Sourced from AliExpress: [BMI160 GY-BMI160 6DOF 6-axis Rate Gyro Gravity Acceler
 
 I HATE GRAVITY AAAAA
 
-Also turns out that dead reckoning is a pretty hard problem to solve 🙃
+Also turns out that dead reckoning is a pretty hard problem to solve, who'd have thought? 🙃
