@@ -1,5 +1,13 @@
 # Many accelerometers
 
+Experiments to improve the accuracy of cheap BMI160 accelerometer modules by combining the readings from two or more of them.
+
+## Pictures
+
+| Home Assistant UI                                    | The hardware                             |
+| ---------------------------------------------------- | ---------------------------------------- |
+| ![Screenshot of the sensor values](assets/ha-ui.png) | ![Photo of the breadboards](image-1.png) |
+
 ## Hardware
 
 - ESP32 development board
@@ -56,3 +64,9 @@ Then, you can customise the addresses in `accelerometers.yaml` by editing the fo
 Sourced from AliExpress: [BMI160 GY-BMI160 6DOF 6-axis Rate Gyro Gravity Accelerometer Sensor Module IIC I2C SPI Communication Protocol 3-5V](https://www.aliexpress.com/item/1005006351402967.html)
 
 ![Pinout and schematic for the module](assets/bmi160_pinout.png)
+
+## Limitations
+
+I HATE GRAVITY AAAAA
+
+Also turns out that dead reckoning is a pretty hard problem to solve 🙃
